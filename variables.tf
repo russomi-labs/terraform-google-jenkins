@@ -40,6 +40,7 @@ variable "jenkins_instance_machine_type" {
 
 variable "jenkins_boot_disk_source_image" {
   description = "The name of the disk image to use as the boot disk for the Jenkins master"
+  default = "bitnami-jenkins-2-222-3-0-linux-debian-9-x86-64"
 }
 
 variable "jenkins_boot_disk_source_image_project" {
