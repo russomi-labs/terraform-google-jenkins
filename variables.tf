@@ -159,7 +159,7 @@ variable "jenkins_workers_boot_disk_type" {
 
 variable "jenkins_workers_boot_disk_source_image" {
   description = "The fully qualified URL to the disk image to use as the boot disk for Jenkins workers"
-  default     = "daily-ubuntu-1804-bionic-v20200610a"
+  default     = "ubuntu-1804-bionic-v20200610"
 }
 
 variable "jenkins_workers_boot_disk_source_image_project" {
