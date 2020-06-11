@@ -40,7 +40,6 @@ variable "jenkins_instance_machine_type" {
 
 variable "jenkins_boot_disk_source_image" {
   description = "The name of the disk image to use as the boot disk for the Jenkins master"
-  default     = "bitnami-jenkins-2-176-2-0-linux-debian-9-x86-64"
 }
 
 variable "jenkins_boot_disk_source_image_project" {
@@ -159,7 +158,7 @@ variable "jenkins_workers_boot_disk_type" {
 
 variable "jenkins_workers_boot_disk_source_image" {
   description = "The fully qualified URL to the disk image to use as the boot disk for Jenkins workers"
-  default     = "ubuntu-1604-xenial-v20181023"
+  default     = "daily-ubuntu-1804-bionic-v20200610a"
 }
 
 variable "jenkins_workers_boot_disk_source_image_project" {
