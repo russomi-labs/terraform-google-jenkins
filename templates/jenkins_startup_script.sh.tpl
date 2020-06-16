@@ -44,7 +44,7 @@ generate_ssh_key() {
 install_ssh_key() {
   echo "Installing SSH key for Jenkins configuration"
 
-  jenkins_user_config_path=$(find /opt/bitnami/apps/jenkins/jenkins_home/users/ -type f -name config.xml)
+  jenkins_user_config_path=$(find /opt/bitnami/jenkins/jenkins_home/users/ -type f -name config.xml)
   ssh_public_key_path=/root/.ssh/id_rsa.pub
 
   /bin/cat <<EOF >/tmp/add_ssh_key.py
@@ -77,7 +77,7 @@ EOF
 enable_jenkins_cli() {
   echo "Enabling Jenkins CLI over SSH"
 
-  /bin/cat <<EOF >/opt/bitnami/apps/jenkins/jenkins_home/org.jenkinsci.main.modules.sshd.SSHD.xml
+  /bin/cat <<EOF >/opt/bitnami/jenkins/jenkins_home/org.jenkinsci.main.modules.sshd.SSHD.xml
 <?xml version='1.1' encoding='UTF-8'?>
 <org.jenkinsci.main.modules.sshd.SSHD>
   <port>0</port>
@@ -89,7 +89,7 @@ EOF
 disable_jenkins_cli() {
   echo "Disabling Jenkins CLI over SSH"
 
-  rm -rf /opt/bitnami/apps/jenkins/jenkins_home/org.jenkinsci.main.modules.sshd.SSHD.xml
+  rm -rf /opt/bitnami/jenkins/jenkins_home/org.jenkinsci.main.modules.sshd.SSHD.xml
 
   restart_jenkins
 }
@@ -101,7 +101,7 @@ download_jenkins_cli() {
 uninstall_ssh_key() {
   echo "Uninstalling SSH key for Jenkins configuration"
 
-  jenkins_user_config_path=$(find /opt/bitnami/apps/jenkins/jenkins_home/users/ -type f -name config.xml)
+  jenkins_user_config_path=$(find /opt/bitnami/jenkins/jenkins_home/users/ -type f -name config.xml)
 
   /bin/cat <<EOF >/tmp/add_ssh_key.py
 import xml.etree.ElementTree as ET
@@ -164,7 +164,7 @@ EOF
 install_gce_plugin_configuration() {
   echo "Configuring GCE plugin"
 
-  jenkins_config_path=/opt/bitnami/apps/jenkins/jenkins_home/config.xml
+  jenkins_config_path=/opt/bitnami/jenkins/jenkins_home/config.xml
 
   /bin/cat <<EOF >/tmp/add_cloud.py
 import xml.etree.ElementTree as ET
