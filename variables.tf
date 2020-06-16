@@ -199,7 +199,7 @@ variable "jenkins_workers_launch_timeout_seconds" {
 
 variable "jenkins_workers_boot_disk_size_gb" {
   description = "The size of Jenkins worker boot disks, in gigabytes"
-  default     = "10"
+  default     = "100"
 }
 
 variable "jenkins_workers_num_executors" {
