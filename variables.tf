@@ -30,7 +30,7 @@ variable "create_firewall_rules" {
 
 variable "jenkins_instance_name" {
   description = "The name to assign to the Jenkins VM"
-  default     = "jenkins"
+  default     = "jenkins-test"
 }
 
 variable "jenkins_instance_machine_type" {
