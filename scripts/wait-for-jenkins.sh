@@ -21,6 +21,18 @@ PROJECT=$1
 ZONE=$2
 INSTANCE_NAME=$3
 COMMAND="ls /tmp/instance_setup_complete"
+COMMAND2="gsutil cp gs://factoryjenkinsbackup/jenkins.tar.bz2 /tmp/jenkins.tar.bz2"
+COMMAND3="touch /tmp/instance_setup_complete"
+
+echo "Copying latest backup from GCP bucket..."
+
+gcloud compute --project "${PROJECT}" ssh "cftk@${INSTANCE_NAME}" --zone "${ZONE}" --command="${COMMAND2}" --force-key-file-overwrite 2>/dev/null
+rc=$?
+
+echo "Marking instance complete."
+
+gcloud compute --project "${PROJECT}" ssh "cftk@${INSTANCE_NAME}" --zone "${ZONE}" --command="${COMMAND3}" --force-key-file-overwrite 2>/dev/null
+rc=$?
 
 echo "Waiting for instance ${INSTANCE_NAME} in project ${PROJECT} to complete..."
 
