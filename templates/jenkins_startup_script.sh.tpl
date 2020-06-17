@@ -11,7 +11,7 @@ function get_jenkins_auth_code() {
   echo "Waiting for Jenkins to come online"
   while [ "$${_last_exit_code}" != "0" ]; do
     printf '.'
-    JENKINS_AUTH_CRUMB=$(wget -q --auth-no-challenge --user "$${USERNAME}" --password "$${PASSWORD}" --output-document - 'http://localhost/jenkins/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
+    JENKINS_AUTH_CRUMB=$(wget -q --auth-no-challenge --user "$${USERNAME}" --password "$${PASSWORD}" --output-document - 'http://localhost:8080/jenkins/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
     _last_exit_code=$?
     sleep 5
   done
@@ -95,7 +95,7 @@ disable_jenkins_cli() {
 }
 
 download_jenkins_cli() {
-  wget -O /tmp/jenkins-cli.jar http://localhost/jenkins/jnlpJars/jenkins-cli.jar
+  wget -O /tmp/jenkins-cli.jar http://localhost:8080/jenkins/jnlpJars/jenkins-cli.jar
 }
 
 uninstall_ssh_key() {
@@ -123,7 +123,7 @@ EOF
 skip_jenkins_install_wizard() {
   echo "Skipping install wizard"
   get_jenkins_auth_code
-  _result=$(curl -vv -X POST -H "$${JENKINS_AUTH_CRUMB}" --user "$${USERNAME}:$${PASSWORD}" http://localhost/jenkins/setupWizard/completeInstall)
+  _result=$(curl -vv -X POST -H "$${JENKINS_AUTH_CRUMB}" --user "$${USERNAME}:$${PASSWORD}" http://localhost:8080/jenkins/setupWizard/completeInstall)
   echo "Skipped install wizard"
 }
 
@@ -131,7 +131,7 @@ restart_jenkins() {
   echo "Restarting Jenkins"
   /opt/bitnami/ctlscript.sh restart
 
-  until $(curl --output /dev/null --silent --head --fail http://localhost/jenkins/login); do
+  until $(curl --output /dev/null --silent --head --fail http://localhost:8080/jenkins/login); do
     printf '.'
     sleep 1
   done
@@ -150,7 +150,7 @@ install_jenkins_plugins() {
 
 install_gce_credentials() {
   echo "Configuring GCE credentials"
-
+x
   /bin/cat <<EOF >/tmp/gce_credential.xml
 <com.google.jenkins.plugins.credentials.oauth.GoogleRobotMetadataCredentials plugin="google-oauth-plugin@0.6">
   <module class="com.google.jenkins.plugins.credentials.oauth.GoogleRobotMetadataCredentialsModule"/>
@@ -289,7 +289,7 @@ def install_job(server, job_name, job_manifest, attempt=0):
         time.sleep(10)
         install_job(job_name, job_manifest, attempt+1)
 
-server = jenkins.Jenkins('http://localhost/jenkins/', username='${jenkins_username}', password='${jenkins_password}')
+server = jenkins.Jenkins('http://localhost:8080/jenkins/', username='${jenkins_username}', password='${jenkins_password}')
 for job in JOBS:
     install_job(server, job['name'], job['manifest'])
 EOF
