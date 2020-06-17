@@ -298,10 +298,6 @@ EOF
   echo "Jenkins jobs installed"
 }
 
-touch_setup_complete_file() {
-  touch /tmp/instance_setup_complete
-}
-
 echo "Configuring Jenkins"
 
 enable_jenkins_cli
@@ -320,7 +316,5 @@ install_jenkins_jobs
 
 uninstall_ssh_key
 disable_jenkins_cli
-
-touch_setup_complete_file
 
 echo "software-status configuration: success"
