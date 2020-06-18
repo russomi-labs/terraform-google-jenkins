@@ -27,6 +27,7 @@ locals {
     "roles/compute.instanceAdmin.v1",
     "roles/iam.serviceAccountUser",
     "roles/iam.serviceAccountAdmin",
+    "roles/iam.storage.admin",
   ]
 }
 
