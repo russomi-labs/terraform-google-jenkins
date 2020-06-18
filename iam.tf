@@ -63,6 +63,12 @@ resource "google_storage_bucket_iam_member" "jenkins-upload" {
   role   = "roles/storage.admin"
   member = "serviceAccount:${google_service_account.jenkins.email}"
 }
+resource "google_storage_bucket_iam_member" "factoryjenkinsbackup" {
+  count  = var.gcs_bucket != "" ? 1 : 0
+  bucket = var.gcs_bucket
+  role   = "roles/storage.admin"
+  member = "serviceAccount:${google_service_account.jenkins.email}"
+}  
 
 // SharedVPC requirements
 locals {
