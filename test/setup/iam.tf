@@ -28,6 +28,7 @@ locals {
     "roles/iam.serviceAccountUser",
     "roles/iam.serviceAccountAdmin",
     "roles/iam.storage.admin",
+    "roles/storage.objectAdmin",
   ]
 }
 
