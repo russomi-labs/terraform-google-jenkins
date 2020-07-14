@@ -114,7 +114,7 @@ resource "google_compute_instance" "jenkins" {
   boot_disk {
     initialize_params {
       image = data.google_compute_image.jenkins.self_link
-      size = 100
+      size = 200
     }
   }
 
