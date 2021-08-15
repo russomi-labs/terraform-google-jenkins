@@ -47,3 +47,4 @@ crash.log
 credentials.json
 
 test/fixtures/*/ssh/key
+examples/simple_example/.terraform.lock.hcl
